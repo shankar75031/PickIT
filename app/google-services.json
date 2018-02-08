@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "241798375074",
+    "firebase_url": "https://pickit-53e95.firebaseio.com",
+    "project_id": "pickit-53e95",
+    "storage_bucket": "pickit-53e95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241798375074:android:6b2f822af4737384",
+        "android_client_info": {
+          "package_name": "com.pickit.kronos.pickit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241798375074-akvgsfnhbb75ruq59vukm213ruinfgk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmZIUnfT8anJ__wZ-SQD1Pw08IuFK7GTo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

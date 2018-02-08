@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="airport_codes">
+        <item>COK</item>
+        <item>TRM</item>
+    </array>
+    <array name="airport_name">
+        <item>COK - Cochin International Airport</item>
+        <item>TRM - Trivandrum Airport</item>
+    </array>
+
+</resources>

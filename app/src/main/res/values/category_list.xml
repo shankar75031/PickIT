@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="COK1">
+        <item>Apparels</item>
+        <item>Chocolates and Confectionaries</item>
+        <item>Food</item>
+    </array>
+
+</resources>
