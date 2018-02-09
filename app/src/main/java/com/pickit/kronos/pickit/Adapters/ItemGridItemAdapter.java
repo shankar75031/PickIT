@@ -15,32 +15,45 @@ import com.pickit.kronos.pickit.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by ASUS on 27-01-2018.
- */
-
 public class ItemGridItemAdapter extends ArrayAdapter<Item> {
-    private ArrayList<Item> itemGridItems;
+    private ArrayList<Item> mGridItemsArrayList;
+    private View mGridItemView;
+    private ImageView mItemImageView;
+    private TextView mItemNameTextView, mItemPriceTextView;
+    private Item mItem;
+
+    //CONSTRUCTOR
     public ItemGridItemAdapter(Activity context, ArrayList<Item> rows) {
         super(context, 0, rows);
-        itemGridItems = rows;
+        mGridItemsArrayList = rows;
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View gridItemView = convertView;
-        Item item = itemGridItems.get(position);
-        if(gridItemView == null){
-            gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_item, parent, false);
+        mGridItemView = convertView;
+        mItem = mGridItemsArrayList.get(position);
+        if (mGridItemView == null) {
+            mGridItemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_item, parent, false);
         }
-        ImageView itemImage = (ImageView) gridItemView.findViewById(R.id.grid_item_item_image);
-        TextView itemName = (TextView) gridItemView.findViewById(R.id.grid_item_item_name);
-        TextView itemPrice = (TextView) gridItemView.findViewById(R.id.grid_item_item_price);
-        itemImage.setImageResource(R.drawable.shopping_bag);
-        itemName.setText(item.getItemName());
-        itemPrice.setText(item.getPrice());
-        return gridItemView;
 
+        initViews();
 
+        setViews();
+
+        return mGridItemView;
+    }
+
+    //Links xml view id with java view objects
+    private void initViews() {
+        mItemImageView = mGridItemView.findViewById(R.id.grid_item_item_image);
+        mItemNameTextView = mGridItemView.findViewById(R.id.grid_item_item_name);
+        mItemPriceTextView = mGridItemView.findViewById(R.id.grid_item_item_price);
+    }
+
+    private void setViews() {
+        mItemImageView.setImageResource(R.drawable.shopping_bag);
+        mItemNameTextView.setText(mItem.getItemName());
+        mItemPriceTextView.setText(mItem.getPrice());
     }
 }

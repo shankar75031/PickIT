@@ -1,31 +1,32 @@
 package com.pickit.kronos.pickit.Objects;
 
-/**
- * Created by ASUS on 27-01-2018.
- */
-
 public class CategoryGridItem {
-    private int CategoryImageId;
-    private String getCategoryName;
 
-    public CategoryGridItem(int categoryImageId, String getCategoryName) {
-        CategoryImageId = categoryImageId;
-        this.getCategoryName = getCategoryName;
+    //ATTRIBUTES
+    private int mCategoryImageId;
+    private String mCategoryName;
+
+    //CONSTRUCTORS
+    public CategoryGridItem(int categoryImageId, String categoryName) {
+        this.mCategoryImageId = categoryImageId;
+        this.mCategoryName = categoryName;
     }
 
+    //GETTER METHODS
     public int getCategoryImageId() {
-        return CategoryImageId;
+        return mCategoryImageId;
     }
 
+    //SETTER METHODS
     public void setCategoryImageId(int categoryImageId) {
-        CategoryImageId = categoryImageId;
+        this.mCategoryImageId = categoryImageId;
     }
 
     public String getGetCategoryName() {
-        return getCategoryName;
+        return mCategoryName;
     }
 
-    public void setGetCategoryName(String getCategoryName) {
-        this.getCategoryName = getCategoryName;
+    public void setGetCategoryName(String categoryName) {
+        this.mCategoryName = categoryName;
     }
 }

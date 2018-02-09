@@ -2,8 +2,8 @@ package com.pickit.kronos.pickit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,16 +34,17 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         FirebaseApp.initializeApp(this);
-        itemList = new ArrayList<Item>();
-        gridView = (GridView) findViewById(R.id.grid_view_items);
+        itemList = new ArrayList<>();
+        gridView = findViewById(R.id.grid_view_items);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
         String airportCode = pref.getString("airport_terminal", "").substring(0,3);
         String terminalNumber = pref.getString("airport_terminal", "").substring(3);
         String category = pref.getString("category", "");
         setTitle(category);
-        //Firebase
 
+
+        //Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("/" + airportCode + "/" + terminalNumber + "/" + category);
         myRef.addValueEventListener(new ValueEventListener() {
@@ -94,7 +95,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_cart) {
-
+            //TODO: What happens when cart icon is clicked
             // Do something
             return true;
         }

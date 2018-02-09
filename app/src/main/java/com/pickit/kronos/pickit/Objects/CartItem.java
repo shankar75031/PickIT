@@ -1,51 +1,54 @@
 package com.pickit.kronos.pickit.Objects;
 
-/**
- * Created by ASUS on 28-01-2018.
- */
+
 
 public class CartItem {
-    String itemName;
-    String itemPrice;
-    String qty;
-    String total;
 
+    //ATTRIBUTES
+    private String mItemName;
+    private String mItemPrice;
+    private String mQuantity;
+    private String mTotal;
+
+    //CONSTRUCTOR
     public CartItem(String itemName, String itemPrice, String qty) {
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.qty = qty;
-        this.total = String.valueOf(Integer.parseInt(itemPrice) * Integer.parseInt(qty));
+        this.mItemName = itemName;
+        this.mItemPrice = itemPrice;
+        this.mQuantity = qty;
+        this.mTotal = String.valueOf(Integer.parseInt(mItemPrice) * Integer.parseInt(mQuantity));
     }
 
+    //GETTER METHODS
     public String getItemName() {
-        return itemName;
+        return mItemName;
     }
 
+    //SETTER METHODS
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.mItemName = itemName;
     }
 
     public String getItemPrice() {
-        return itemPrice;
+        return mItemPrice;
     }
 
-    public void setItemPrice() {
-        this.itemPrice = itemPrice;
+    public void setItemPrice(String itemPrice) {
+        this.mItemPrice = itemPrice;
     }
 
     public String getQty() {
-        return qty;
+        return mQuantity;
     }
 
     public void setQty(String qty) {
-        this.qty = qty;
+        this.mQuantity = qty;
     }
 
     public String getTotal() {
-        return total;
+        return mTotal;
     }
 
     public void setTotal(String total) {
-        this.total = String.valueOf(Integer.parseInt(itemPrice) * Integer.parseInt(qty));
+        this.mTotal = String.valueOf(Integer.parseInt(mItemPrice) * Integer.parseInt(mQuantity));
     }
 }

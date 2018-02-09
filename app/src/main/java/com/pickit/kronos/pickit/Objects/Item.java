@@ -1,46 +1,46 @@
 package com.pickit.kronos.pickit.Objects;
 
-/**
- * Created by ASUS on 27-01-2018.
- */
-
 public class Item {
-    private String itemName;
-    private String Price;
-    private String Description;
 
+    //ATTRIBUTES
+    private String mItemName;
+    private String mPrice;
+    private String mDescription;
+
+    //CONSTRUCTORS
     public Item() {
     }
 
-    public String getItemName() {
-        return itemName;
+    public Item(String itemName, String price, String description) {
+
+        this.mItemName = itemName;
+        this.mPrice = price;
+        this.mDescription = description;
     }
 
+    //GETTER METHODS
+    public String getItemName() {
+        return mItemName;
+    }
+
+    //SETTER METHODS
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.mItemName = itemName;
     }
 
     public String getPrice() {
-        return Price;
+        return mPrice;
     }
 
-    public void setPrice(String Price) {
-        this.Price = Price;
+    public void setPrice(String price) {
+        this.mPrice = price;
     }
 
     public String getDescription() {
-        return Description;
+        return mDescription;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.mDescription = description;
     }
-
-    public Item(String itemName, String Price, String Description) {
-
-        this.itemName = itemName;
-        this.Price = Price;
-        this.Description = Description;
-    }
-
 }

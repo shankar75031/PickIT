@@ -15,32 +15,10 @@ import com.pickit.kronos.pickit.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by ASUS on 27-01-2018.
- */
-
 public class CategoryGridItemAdapter extends ArrayAdapter<CategoryGridItem>{
     private ArrayList<CategoryGridItem> categoryGridItems;
-    public CategoryGridItemAdapter(Activity context, ArrayList<CategoryGridItem> rows) {
-        super(context, 0, rows);
-        categoryGridItems = rows;
-    }
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View gridItemView = convertView;
-        CategoryGridItem categoryGridItem = categoryGridItems.get(position);
-        if(gridItemView == null){
-            gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_category, parent, false);
-        }
-        ImageView categoryImage = (ImageView) gridItemView.findViewById(R.id.grid_item_category_image);
-        TextView categoryName = (TextView) gridItemView.findViewById(R.id.grid_item_category_name);
-        categoryImage.setImageResource(mThumbIds[position]);
-        categoryName.setText(categoryGridItem.getGetCategoryName());
-        return gridItemView;
-    }
-    //references to our images
-    private Integer[] mThumbIds={
+    //References to our images
+    private Integer[] mThumbIds = {
             R.drawable.apparels_f,
             R.drawable.confec_f,
             R.drawable.souvenir_f,
@@ -50,5 +28,31 @@ public class CategoryGridItemAdapter extends ArrayAdapter<CategoryGridItem>{
             R.drawable.booksmusic_f,
             R.drawable.perfumes_f
     };
+
+    //CONSTRUCTOR
+    public CategoryGridItemAdapter(Activity context, ArrayList<CategoryGridItem> rows) {
+        super(context, 0, rows);
+        categoryGridItems = rows;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View gridItemView = convertView;
+        CategoryGridItem categoryGridItem = categoryGridItems.get(position);
+        if(gridItemView == null){
+            gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_category, parent, false);
+        }
+
+        //Initializing views
+        ImageView categoryImage = gridItemView.findViewById(R.id.grid_item_category_image);
+        TextView categoryName = gridItemView.findViewById(R.id.grid_item_category_name);
+
+        //Setting values to views
+        categoryImage.setImageResource(mThumbIds[position]);
+        categoryName.setText(categoryGridItem.getGetCategoryName());
+
+        return gridItemView;
+    }
 
 }

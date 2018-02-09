@@ -2,8 +2,8 @@ package com.pickit.kronos.pickit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,13 +26,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GridView mItemCategoryGridView;
-    private String airportTerminalCode;
     int selectedCategoryPosition;
     String selectedCategory;
     CategoryGridItemAdapter adapter;
     SharedPreferences pref;
     ArrayList<CategoryGridItem> categoryArrayList;
+    private GridView mItemCategoryGridView;
+    private String airportTerminalCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +41,15 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
         setTitle(getResources().getString(R.string.app_name));
-        mItemCategoryGridView = (GridView) findViewById(R.id.item_category_grid);
+        mItemCategoryGridView = findViewById(R.id.item_category_grid);
         pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
         airportTerminalCode = pref.getString("airport_terminal", "");
         int id = getResources().getIdentifier(airportTerminalCode, "array", getPackageName());
-        categoryArrayList = new ArrayList<CategoryGridItem>();
+        categoryArrayList = new ArrayList<>();
 
 
         pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
-        String airportCode = pref.getString("airport_terminal", "").substring(0,3);
+        String airportCode = pref.getString("airport_terminal", "").substring(0, 3);
         String terminalNumber = pref.getString("airport_terminal", "").substring(3);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -56,24 +57,25 @@ public class MainActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if(adapter != null)
+                if (adapter != null)
                     categoryArrayList.clear();
                 adapter.clear();
-                Log.e("Count " ,""+snapshot.getChildrenCount());
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                Log.e("Count ", "" + snapshot.getChildrenCount());
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     String post = postSnapshot.getKey();
                     CategoryGridItem categoryGridItem = new CategoryGridItem(R.drawable.shopping_bag, post);
                     categoryArrayList.add(categoryGridItem);
                 }
-                adapter = new CategoryGridItemAdapter( MainActivity.this, categoryArrayList);
+                adapter = new CategoryGridItemAdapter(MainActivity.this, categoryArrayList);
                 mItemCategoryGridView.setAdapter(adapter);
             }
+
             @Override
             public void onCancelled(DatabaseError firebaseError) {
-                Log.e("The read failed: " ,firebaseError.getMessage());
+                Log.e("The read failed: ", firebaseError.getMessage());
             }
         });
-         adapter = new CategoryGridItemAdapter
+        adapter = new CategoryGridItemAdapter
                 (this, categoryArrayList);
         mItemCategoryGridView.setAdapter(adapter);
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedCategoryPosition = i;
 
-                TextView text = (TextView) view.findViewById(R.id.grid_item_category_name);
+                TextView text = view.findViewById(R.id.grid_item_category_name);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("category", text.getText().toString());
                 editor.apply();

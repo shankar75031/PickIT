@@ -15,29 +15,33 @@ import com.pickit.kronos.pickit.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by ASUS on 28-01-2018.
- */
-
 public class CartItemAdapter extends ArrayAdapter<CartItem>
 
-    {
-        private ArrayList<CartItem> cartItemArrayList;
+{
+    private ArrayList<CartItem> mCartItemArrayList;
+
+    //CONSTRUCTOR
     public CartItemAdapter(Activity context, ArrayList<CartItem> rows) {
         super(context, 0, rows);
-        cartItemArrayList = rows;
+        mCartItemArrayList = rows;
     }
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View gridItemView = convertView;
-        CartItem cartItem = cartItemArrayList.get(position);
-        if(gridItemView == null){
+        CartItem cartItem = mCartItemArrayList.get(position);
+        if (gridItemView == null) {
             gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_category, parent, false);
         }
-        ImageView categoryImage = (ImageView) gridItemView.findViewById(R.id.grid_item_category_image);
-        TextView categoryName = (TextView) gridItemView.findViewById(R.id.grid_item_category_name);
+
+        //Initializing views
+        ImageView categoryImage = gridItemView.findViewById(R.id.grid_item_category_image);
+        TextView categoryName = gridItemView.findViewById(R.id.grid_item_category_name);
+
+        //Setting values to views
         categoryName.setText(cartItem.getItemName());
+
         return gridItemView;
     }
 }
