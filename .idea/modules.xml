@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ANDROID-PickIT.iml" filepath="$PROJECT_DIR$/ANDROID-PickIT.iml" />
       <module fileurl="file://$PROJECT_DIR$/PickIT.iml" filepath="$PROJECT_DIR$/PickIT.iml" />
       <module fileurl="file://D:\PickIT\PickIT\PickIT.iml" filepath="D:\PickIT\PickIT\PickIT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/PickIT-app.iml" filepath="$PROJECT_DIR$/app/PickIT-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:\PickIT\PickIT\app\app.iml" filepath="D:\PickIT\PickIT\app\app.iml" />
     </modules>
