@@ -1,4 +1,4 @@
-package com.pickit.kronos.pickit;
+package com.pickit.kronos.pickit.Adapters;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pickit.kronos.pickit.Objects.CartItem;
+import com.pickit.kronos.pickit.R;
 
 import java.util.ArrayList;
 

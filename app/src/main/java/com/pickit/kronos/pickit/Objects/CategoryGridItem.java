@@ -1,4 +1,4 @@
-package com.pickit.kronos.pickit;
+package com.pickit.kronos.pickit.Objects;
 
 /**
  * Created by ASUS on 27-01-2018.

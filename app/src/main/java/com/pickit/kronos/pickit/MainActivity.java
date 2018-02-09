@@ -18,10 +18,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pickit.kronos.pickit.Adapters.CategoryGridItemAdapter;
+import com.pickit.kronos.pickit.Data.Constants;
+import com.pickit.kronos.pickit.Objects.CategoryGridItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
