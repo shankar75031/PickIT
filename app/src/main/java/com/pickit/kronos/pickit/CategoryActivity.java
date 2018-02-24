@@ -17,9 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pickit.kronos.pickit.Adapters.ItemGridItemAdapter;
-import com.pickit.kronos.pickit.Data.Constants;
-import com.pickit.kronos.pickit.Objects.Item;
 
 import java.util.ArrayList;
 
@@ -34,36 +31,37 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         FirebaseApp.initializeApp(this);
-        itemList = new ArrayList<>();
+        itemList = new ArrayList<Item>();
         gridView = findViewById(R.id.grid_view_items);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
-        String airportCode = pref.getString("airport_terminal", "").substring(0,3);
-        String terminalNumber = pref.getString("airport_terminal", "").substring(3);
+        String departureAirport = pref.getString("DepartureAirport", "");
         String category = pref.getString("category", "");
         setTitle(category);
-
-
         //Firebase
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("/" + airportCode + "/" + terminalNumber + "/" + category);
+        DatabaseReference myRef = database.getReference("/" + departureAirport + "/" + category);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 itemList.clear();
-                if(itemGridItemAdapter != null)
+                if (itemGridItemAdapter != null)
                     itemGridItemAdapter.clear();
-                Log.e("Count " ,""+snapshot.getChildrenCount());
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Item post = postSnapshot.getValue(Item.class);
-                    itemList.add(post);
+                Log.e("Count ", "" + snapshot.getChildrenCount());
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    if (!postSnapshot.getKey().equals("image") && !postSnapshot.getKey().equals("carts")) {
+                        Item post = postSnapshot.getValue(Item.class);
+                        itemList.add(post);
+                    }
                 }
-                itemGridItemAdapter = new ItemGridItemAdapter(CategoryActivity.this,itemList);
+                itemGridItemAdapter = new ItemGridItemAdapter(CategoryActivity.this, itemList);
                 gridView.setAdapter(itemGridItemAdapter);
             }
+
             @Override
             public void onCancelled(DatabaseError firebaseError) {
-                Log.e("The read failed: " ,firebaseError.getMessage());
+                Log.e("The read failed: ", firebaseError.getMessage());
             }
         });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,7 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(CategoryActivity.this, PurchaseActivity.class).
                         putExtra("itemName", itemList.get(i).getItemName())
-                        .putExtra("Price",itemList.get(i).getPrice())
+                        .putExtra("Price", itemList.get(i).getPrice())
                         .putExtra("Description", itemList.get(i).getDescription())
                         .putExtra("qty", 1)
                 );
@@ -79,6 +77,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -95,7 +94,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_cart) {
-            //TODO: What happens when cart icon is clicked
+
             // Do something
             return true;
         }

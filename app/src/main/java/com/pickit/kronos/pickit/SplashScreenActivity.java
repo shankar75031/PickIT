@@ -4,95 +4,85 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.EditText;
 import android.widget.Toast;
-
-import com.pickit.kronos.pickit.Data.Constants;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private AutoCompleteTextView mAirportSelectTextView;
+    private EditText pnrTextView;
     private Button mStartButton;
-    private Spinner mTerminalSelectSpinner;
-    private String airportCode;
-    private String terminal;
+    private String pnrNumber;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //to hide top bars
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_splash_screen);
 
-        initViews();
-
         //Autocomplete airport selection
-        String[] countries = getResources().getStringArray(R.array.airport_name);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>
-                (this,android.R.layout.simple_list_item_1,countries);
-        mAirportSelectTextView.setAdapter(adapter);
-
-        //to select terminal
-        mAirportSelectTextView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
-                //String selection = (String) parent.getItemAtPosition(position);
-
-                //to set list of terminals in spinner
-                airportCode = (String) parent.getItemAtPosition(position);
-                airportCode = airportCode.substring(0,3);
-                int id = getResources().getIdentifier(airportCode, "array", getPackageName());
-                List<String> terminalList = Arrays.asList(getResources().getStringArray(id));
-                ArrayList<String> terminalArrayList = new ArrayList<>();
-                terminalArrayList.addAll(terminalList);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>
-                        (getApplicationContext(),android.R.layout.simple_list_item_1,terminalArrayList);
-                mTerminalSelectSpinner.setAdapter(adapter);
-
-            }
-        });
-
-
+        pnrTextView = findViewById(R.id.splash_screen_airport_code);
+        mStartButton = findViewById(R.id.splash_screen_start);
         //what happens on continue button click
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                terminal = Integer.toString(mTerminalSelectSpinner.getSelectedItemPosition() + 1);
+                pnrNumber = pnrTextView.getText().toString();
 
-                SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("airport_terminal", airportCode+terminal);
-                editor.apply();
-                if (!terminal.equals("null"))
+                //TODO:Hardcoded PNR check
+                if (pnrNumber.equals("ABEM4Z")) {
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("PNR", pnrNumber);
+                    editor.putString("FirstName", "ADAMS");
+                    editor.putString("LastName", "ANTON");
+                    editor.putString("Phone", "313712387");
+                    editor.putString("Email", "antonadams@hetnet.nl");
+                    editor.putString("Address", "Nieuwe Plaatsen 201a NACHGERAAD 7501KO");
+                    editor.putString("DepartureDate", "2018-03-15");
+                    editor.putString("DepartureTime", "15:55");
+                    editor.putString("DepartureAirport", "COK/1");   //TODO:Make COK/1 as FRA
+                    editor.putString("ArrivalDate", "2018-03-15");
+                    editor.putString("ArrivalTime", "21:20");
+                    editor.putString("ArrivalAirport", "AYT");
+                    editor.putString("AirlineID", "XQ");
+                    editor.putString("FlightNumber", "141");
+                    editor.apply();
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                else
-                    Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter a valid PNR", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-    }
+        // Enable Send button when there's text to send
+        pnrTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-    //Initializing views
-    private void initViews() {
-        mAirportSelectTextView = findViewById(R.id.splash_screen_airport_code);
-        mStartButton = findViewById(R.id.splash_screen_start);
-        mTerminalSelectSpinner = findViewById(R.id.splash_screen_terminal_select_spinner);
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().trim().length() > 0) {
+                    mStartButton.setEnabled(true);
+                } else {
+                    mStartButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }

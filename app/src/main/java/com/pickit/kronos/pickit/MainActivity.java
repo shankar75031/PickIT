@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +12,11 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.pickit.kronos.pickit.Adapters.CategoryGridItemAdapter;
-import com.pickit.kronos.pickit.Data.Constants;
-import com.pickit.kronos.pickit.Objects.CategoryGridItem;
 
 import java.util.ArrayList;
 
@@ -28,11 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
     int selectedCategoryPosition;
     String selectedCategory;
-    CategoryGridItemAdapter adapter;
     SharedPreferences pref;
     ArrayList<CategoryGridItem> categoryArrayList;
+    CategoryGridItemAdapter adapter;
     private GridView mItemCategoryGridView;
     private String airportTerminalCode;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mMessagesDatabaseReference;
+    private ChildEventListener mChildEventListner = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,41 +42,23 @@ public class MainActivity extends AppCompatActivity {
         setTitle(getResources().getString(R.string.app_name));
         mItemCategoryGridView = findViewById(R.id.item_category_grid);
         pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
-        airportTerminalCode = pref.getString("airport_terminal", "");
-        int id = getResources().getIdentifier(airportTerminalCode, "array", getPackageName());
-        categoryArrayList = new ArrayList<>();
+        airportTerminalCode = pref.getString("DepartureAirport", "");
+        categoryArrayList = new ArrayList<CategoryGridItem>();
 
 
         pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
-        String airportCode = pref.getString("airport_terminal", "").substring(0, 3);
-        String terminalNumber = pref.getString("airport_terminal", "").substring(3);
+        String departureAirport = pref.getString("DepartureAirport", "");
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("/" + airportCode + "/" + terminalNumber);
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if (adapter != null)
-                    categoryArrayList.clear();
-                adapter.clear();
-                Log.e("Count ", "" + snapshot.getChildrenCount());
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    String post = postSnapshot.getKey();
-                    CategoryGridItem categoryGridItem = new CategoryGridItem(R.drawable.shopping_bag, post);
-                    categoryArrayList.add(categoryGridItem);
-                }
-                adapter = new CategoryGridItemAdapter(MainActivity.this, categoryArrayList);
-                mItemCategoryGridView.setAdapter(adapter);
-            }
+        //TODO:Arrival and departrure airport price compare
+        //String arrivalAirport = pref.getString("ArrivalAirport", "").substring(3);
 
-            @Override
-            public void onCancelled(DatabaseError firebaseError) {
-                Log.e("The read failed: ", firebaseError.getMessage());
-            }
-        });
+        //Initialized firebase database
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference("/" + departureAirport + "/");
+
         adapter = new CategoryGridItemAdapter
                 (this, categoryArrayList);
-        mItemCategoryGridView.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
 
         mItemCategoryGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CategoryActivity.class));
             }
         });
+        attachDatabaseReadListner();
+        mItemCategoryGridView.setAdapter(adapter);
+
 
     }
 
@@ -117,4 +101,41 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //This method will attach the listener on database reference object
+    private void attachDatabaseReadListner() {
+        if (mChildEventListner == null) {
+            mChildEventListner = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    //Reading a newly added object to the database and adding it to the adapter of the list
+                    CategoryGridItem categoryGridItem = new CategoryGridItem();
+                    categoryGridItem.setGetCategoryName(dataSnapshot.getKey());
+                    categoryGridItem.setCategoryImageId(dataSnapshot.child("image").getValue(String.class));
+                    adapter.add(categoryGridItem);
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            //Adding child event listner to the database reference
+            mMessagesDatabaseReference.addChildEventListener(mChildEventListner);
+        }
+    }
 }

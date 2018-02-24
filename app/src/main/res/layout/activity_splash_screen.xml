@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.pickit.kronos.pickit.SplashScreenActivity">
 
     <ImageView
@@ -14,7 +13,8 @@
         android:layout_height="200dp"
         android:adjustViewBounds="false"
         android:background="#ffffff"
-        android:src="@drawable/pickitlogo" android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:src="@drawable/pickitlogo" />
 
     <TextView
         android:layout_width="257dp"
@@ -24,35 +24,28 @@
         android:textSize="15sp"
         android:textStyle="italic" />
 
-    <AutoCompleteTextView
+    <EditText
                 android:id="@+id/splash_screen_airport_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
                 android:layout_marginLeft="35dp"
-                android:hint="Airport Code"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="20dp"
+        android:hint="PNR Number"
                 android:inputType="text"
-                android:textSize="15sp"
-                android:layout_marginTop="20dp"/>
-    <Spinner
-        android:id="@+id/splash_screen_terminal_select_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Terminal"
-        android:textSize="15sp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="20dp"/>
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/splash_screen_start"
         style="@android:style/Widget.Material.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="#000000"
-        android:text="       Start  Picking      "
-        android:textColor="@android:color/background_light"
-        android:layout_marginTop="20dp"/>
+        android:enabled="false"
+        android:padding="16dp"
+        android:text="Start  Picking"
+        android:textColor="@android:color/background_light" />
 
 
 
