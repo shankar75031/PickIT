@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pickit.kronos.pickit.Data.Constants;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     String selectedCategory;
     SharedPreferences pref;
     ArrayList<CategoryGridItem> categoryArrayList;
-    CategoryGridItemAdapter adapter;
+    com.pickit.kronos.pickit.CategoryGridItemAdapter adapter;
     private GridView mItemCategoryGridView;
     private String airportTerminalCode;
     private FirebaseDatabase mFirebaseDatabase;
@@ -37,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Catalog");
         FirebaseApp.initializeApp(this);
 
         setTitle(getResources().getString(R.string.app_name));
         mItemCategoryGridView = findViewById(R.id.item_category_grid);
+
+
+
         pref = getApplicationContext().getSharedPreferences(Constants.PREFERENCE_FILE, 0);
         airportTerminalCode = pref.getString("DepartureAirport", "");
         categoryArrayList = new ArrayList<CategoryGridItem>();
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference("/" + departureAirport + "/");
 
-        adapter = new CategoryGridItemAdapter
+        adapter = new com.pickit.kronos.pickit.CategoryGridItemAdapter
                 (this, categoryArrayList);
         adapter.setNotifyOnChange(true);
 
@@ -94,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_cart) {
 
-            // Do something
+            startActivity(new Intent(MainActivity.this, CartActivity.class));
             return true;
         }
 
@@ -111,7 +116,11 @@ public class MainActivity extends AppCompatActivity {
                     CategoryGridItem categoryGridItem = new CategoryGridItem();
                     categoryGridItem.setGetCategoryName(dataSnapshot.getKey());
                     categoryGridItem.setCategoryImageId(dataSnapshot.child("image").getValue(String.class));
-                    adapter.add(categoryGridItem);
+                    if(!categoryGridItem.getGetCategoryName().equals("carts")){
+                        adapter.add(categoryGridItem);
+
+                    }
+
                 }
 
                 @Override

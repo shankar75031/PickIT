@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pickit.kronos.pickit.Objects.CartItem;
 import com.pickit.kronos.pickit.R;
 
@@ -32,15 +33,26 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
         View gridItemView = convertView;
         CartItem cartItem = mCartItemArrayList.get(position);
         if (gridItemView == null) {
-            gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_category, parent, false);
+            gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.cart_list_item, parent, false);
         }
 
         //Initializing views
-        ImageView categoryImage = gridItemView.findViewById(R.id.grid_item_category_image);
-        TextView categoryName = gridItemView.findViewById(R.id.grid_item_category_name);
+        ImageView cartImage = gridItemView.findViewById(R.id.cart_item_image);
+        TextView cartName = gridItemView.findViewById(R.id.cart_item_name);
+        TextView cartRate = gridItemView.findViewById(R.id.cart_item_price);
+        TextView cartQty = gridItemView.findViewById(R.id.cart_item_quantity);
+        TextView cartTotal = gridItemView.findViewById(R.id.cart_item_total);
+
+
 
         //Setting values to views
-        categoryName.setText(cartItem.getItemName());
+        cartName.setText(cartItem.getItemName());
+        cartQty.setText(cartItem.getQty());
+        cartRate.setText(cartItem.getItemPrice());
+        cartTotal.setText(cartItem.getTotal());
+        Glide.with(cartImage.getContext())
+                .load(cartItem.getImage())
+                .into(cartImage);
 
         return gridItemView;
     }

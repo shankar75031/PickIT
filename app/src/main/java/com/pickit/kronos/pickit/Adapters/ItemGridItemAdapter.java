@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pickit.kronos.pickit.Objects.Item;
 import com.pickit.kronos.pickit.R;
 
@@ -52,7 +53,9 @@ public class ItemGridItemAdapter extends ArrayAdapter<Item> {
     }
 
     private void setViews() {
-        mItemImageView.setImageResource(R.drawable.shopping_bag);
+        Glide.with(mItemImageView.getContext())
+                .load(mItem.getImage())
+                .into(mItemImageView);
         mItemNameTextView.setText(mItem.getItemName());
         mItemPriceTextView.setText(mItem.getPrice());
     }

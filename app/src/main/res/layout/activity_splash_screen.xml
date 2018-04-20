@@ -31,7 +31,7 @@
                 android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginTop="20dp"
-        android:hint="PNR Number"
+        android:hint="ORDER ID"
                 android:inputType="text"
         android:textSize="15sp" />
 

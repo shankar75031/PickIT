@@ -1,0 +1,323 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:OrderViewRS xmlns:ns2="http://www.iata.org/IATA/EDIST" xmlns:ns3="http://www.ibsplc.com/iFlyRes/simpleTypes" Version="15.2">
+            <ns2:Document>
+                <ns2:Name>NDC</ns2:Name>
+                <ns2:ReferenceVersion>15.2</ns2:ReferenceVersion>
+            </ns2:Document>
+            <ns2:Success/>
+            <ns2:Response>
+                <ns2:OrderViewProcessing/>
+                <ns2:Passengers>
+                    <ns2:Passenger refs="XQ_AUG_319784238" ObjectKey="XQ_PAX_319784238">
+                        <ns2:PTC>ADT</ns2:PTC>
+                        <ns2:Age>
+                            <ns2:BirthDate>1972-02-01Z</ns2:BirthDate>
+                        </ns2:Age>
+                        <ns2:Name>
+                            <ns2:Surname>ADAMS</ns2:Surname>
+                            <ns2:Given>ANTON</ns2:Given>
+                            <ns2:Title>MR</ns2:Title>
+                        </ns2:Name>
+                        <ns2:Contacts>
+                            <ns2:Contact ContactType="Primary">
+                                <ns2:AddressContact>
+                                    <ns2:Application>AddressAtOrigin</ns2:Application>
+                                    <ns2:Street>Nieuwe Plaatsen 201a</ns2:Street>
+                                    <ns2:CityName>NACHGERAAD</ns2:CityName>
+                                    <ns2:PostalCode>7501KO</ns2:PostalCode>
+                                </ns2:AddressContact>
+                                <ns2:EmailContact refs="XQ_AUG_1519310071316">
+                                    <ns2:Application>PERSONAL</ns2:Application>
+                                    <ns2:Address>antonadams@hetnet.nl</ns2:Address>
+                                </ns2:EmailContact>
+                                <ns2:PhoneContact>
+                                    <ns2:Application>HOME</ns2:Application>
+                                </ns2:PhoneContact>
+                            </ns2:Contact>
+                            <ns2:Contact>
+                                <ns2:PhoneContact refs="XQ_AUG_1519310071319">
+                                    <ns2:Application>PERSONAL MOBILE</ns2:Application>
+                                    <ns2:Number>313712387</ns2:Number>
+                                </ns2:PhoneContact>
+                            </ns2:Contact>
+                        </ns2:Contacts>
+                        <ns2:Gender>Male</ns2:Gender>
+                        <ns2:AdditionalRoles PrimaryContactInd="true"/>
+                    </ns2:Passenger>
+                </ns2:Passengers>
+                <ns2:Order refs="XQ_AUG_1519310071521">
+                    <ns2:OrderID Owner="XQ">ABEM4Z</ns2:OrderID>
+                    <ns2:TotalOrderPrice>
+                        <ns2:DetailCurrencyPrice>
+                            <ns2:Total Code="EUR">116.99</ns2:Total>
+                        </ns2:DetailCurrencyPrice>
+                    </ns2:TotalOrderPrice>
+                    <ns2:OrderItems>
+                        <ns2:OrderItem>
+                            <ns2:OrderItemID Owner="XQ">XQ_ORDERITEM_319784238-537344006</ns2:OrderItemID>
+                            <ns2:FlightItem>
+                                <ns2:Price>
+                                    <ns2:BaseAmount Code="EUR">68.67</ns2:BaseAmount>
+                                    <ns2:Surcharges>
+                                        <ns2:Surcharge>
+                                            <ns2:Total Code="EUR">10.0</ns2:Total>
+                                        </ns2:Surcharge>
+                                    </ns2:Surcharges>
+                                    <ns2:Taxes>
+                                        <ns2:Total Code="EUR">48.32</ns2:Total>
+                                    </ns2:Taxes>
+                                </ns2:Price>
+                                <ns2:OriginDestination>
+                                    <ns2:OriginDestinationKey>XQ_OD_537344005</ns2:OriginDestinationKey>
+                                    <ns2:Flight>
+                                        <ns2:SegmentKey>XQ_SEG_211615456</ns2:SegmentKey>
+                                        <ns2:Departure>
+                                            <ns2:AirportCode>FRA</ns2:AirportCode>
+                                            <ns2:Date>2018-03-15Z</ns2:Date>
+                                            <ns2:Time>15:55</ns2:Time>
+                                        </ns2:Departure>
+                                        <ns2:Arrival>
+                                            <ns2:AirportCode>AYT</ns2:AirportCode>
+                                            <ns2:Date>2018-03-15Z</ns2:Date>
+                                            <ns2:Time>21:20</ns2:Time>
+                                            <ns2:ChangeOfDay>0</ns2:ChangeOfDay>
+                                        </ns2:Arrival>
+                                        <ns2:MarketingCarrier>
+                                            <ns2:AirlineID>XQ</ns2:AirlineID>
+                                            <ns2:FlightNumber>141</ns2:FlightNumber>
+                                        </ns2:MarketingCarrier>
+                                        <ns2:Equipment>
+                                            <ns2:AircraftCode>738</ns2:AircraftCode>
+                                            <ns2:AirlineEquipCode>800</ns2:AirlineEquipCode>
+                                        </ns2:Equipment>
+                                        <ns2:CabinType>
+                                            <ns2:Code>5</ns2:Code>
+                                            <ns2:Name>ECONOMY</ns2:Name>
+                                        </ns2:CabinType>
+                                        <ns2:ClassOfService>
+                                            <ns2:Code>V</ns2:Code>
+                                        </ns2:ClassOfService>
+                                        <ns2:Details>
+                                            <ns2:FlightDuration>
+                                                <ns2:Value>P0Y0M0DT3H25M0.000S</ns2:Value>
+                                            </ns2:FlightDuration>
+                                        </ns2:Details>
+                                    </ns2:Flight>
+                                </ns2:OriginDestination>
+                                <ns2:FareDetail>
+                                    <ns2:FareComponent E_TicketInd="true" refs="XQ_AUG_1519310071531 XQ_AUG_1519310071535" ObjectKey="XQ_FC_1519310071528-104945">
+                                        <ns2:SegmentReference>XQ_SEG_211615456</ns2:SegmentReference>
+                                        <ns2:PriceBreakdown>
+                                            <ns2:Price>
+                                                <ns2:BaseAmount Code="EUR">68.67</ns2:BaseAmount>
+                                                <ns2:Surcharges>
+                                                    <ns2:Surcharge>
+                                                        <ns2:Total>10.0</ns2:Total>
+                                                        <ns2:Breakdown>
+                                                            <ns2:Fee>
+                                                                <ns2:Amount Code="EUR">10.0</ns2:Amount>
+                                                                <ns2:Designator>FUEL</ns2:Designator>
+                                                            </ns2:Fee>
+                                                        </ns2:Breakdown>
+                                                    </ns2:Surcharge>
+                                                </ns2:Surcharges>
+                                                <ns2:Taxes>
+                                                    <ns2:Total Code="EUR">48.32</ns2:Total>
+                                                    <ns2:Breakdown>
+                                                        <ns2:Tax refs="XQ_AUG_1519310071530">
+                                                            <ns2:Amount Code="EUR">7.47</ns2:Amount>
+                                                            <ns2:Nation>DE</ns2:Nation>
+                                                            <ns2:TaxCode>OY</ns2:TaxCode>
+                                                            <ns2:Description>Air Transport Tax</ns2:Description>
+                                                        </ns2:Tax>
+                                                        <ns2:Tax refs="XQ_AUG_1519310071533">
+                                                            <ns2:Amount Code="EUR">9.56</ns2:Amount>
+                                                            <ns2:Nation>DE</ns2:Nation>
+                                                            <ns2:TaxCode>DE</ns2:TaxCode>
+                                                            <ns2:Description>Airport Security Charge</ns2:Description>
+                                                        </ns2:Tax>
+                                                        <ns2:Tax refs="XQ_AUG_1519310071532">
+                                                            <ns2:Amount Code="EUR">31.29</ns2:Amount>
+                                                            <ns2:Nation>DE</ns2:Nation>
+                                                            <ns2:TaxCode>RA</ns2:TaxCode>
+                                                            <ns2:Description>Passenger Service Charge</ns2:Description>
+                                                        </ns2:Tax>
+                                                    </ns2:Breakdown>
+                                                </ns2:Taxes>
+                                            </ns2:Price>
+                                        </ns2:PriceBreakdown>
+                                        <ns2:FareBasis>
+                                            <ns2:FareBasisCode>
+                                                <ns2:Code>VINT</ns2:Code>
+                                            </ns2:FareBasisCode>
+                                            <ns2:RBD>V</ns2:RBD>
+                                        </ns2:FareBasis>
+                                        <ns2:TicketDesig>VINT</ns2:TicketDesig>
+                                        <ns2:FareRules>
+                                            <ns2:AdvanceStay>
+                                                <ns2:AdvancePurchase>P0Y0M0DT0H0M0.000S</ns2:AdvancePurchase>
+                                            </ns2:AdvanceStay>
+                                        </ns2:FareRules>
+                                    </ns2:FareComponent>
+                                </ns2:FareDetail>
+                            </ns2:FlightItem>
+                            <ns2:Associations>
+                                <ns2:Passengers>
+                                    <ns2:PassengerReferences>XQ_PAX_319784238</ns2:PassengerReferences>
+                                </ns2:Passengers>
+                            </ns2:Associations>
+                        </ns2:OrderItem>
+                    </ns2:OrderItems>
+                </ns2:Order>
+                <ns2:Payments>
+                    <ns2:Payment>
+                        <ns2:Method>
+                            <ns2:PaymentCardMethod>
+                                <ns2:CardCode>VI</ns2:CardCode>
+                                <ns2:MaskedCardNumber>450803XXXXXX4509</ns2:MaskedCardNumber>
+                                <ns2:CardHolderName>ALEX</ns2:CardHolderName>
+                                <ns2:EffectiveExpireDate/>
+                            </ns2:PaymentCardMethod>
+                        </ns2:Method>
+                        <ns2:Amount Code="EUR">116.99</ns2:Amount>
+                    </ns2:Payment>
+                </ns2:Payments>
+                <ns2:TicketDocInfos>
+                    <ns2:TicketDocInfo>
+                        <ns2:TicketDocument>
+                            <ns2:TicketDocNbr>5642107070329</ns2:TicketDocNbr>
+                            <ns2:Type>
+                                <ns2:Code>702</ns2:Code>
+                                <ns2:Definition>Ticket(electronic)</ns2:Definition>
+                            </ns2:Type>
+                            <ns2:NumberofBooklets>1</ns2:NumberofBooklets>
+                            <ns2:DateOfIssue>2018-02-24Z</ns2:DateOfIssue>
+                            <ns2:TicketingLocation>AYT</ns2:TicketingLocation>
+                            <ns2:CouponInfo>
+                                <ns2:CouponNumber>1</ns2:CouponNumber>
+                                <ns2:Status>
+                                    <ns2:Code>I</ns2:Code>
+                                    <ns2:Definition>OPENFORUSE</ns2:Definition>
+                                </ns2:Status>
+                                <ns2:SoldAirlineInfo>
+                                    <ns2:Departure>
+                                        <ns2:AirportCode>FRA</ns2:AirportCode>
+                                        <ns2:Date>2018-03-15Z</ns2:Date>
+                                        <ns2:Time>15:55</ns2:Time>
+                                    </ns2:Departure>
+                                    <ns2:Arrival>
+                                        <ns2:AirportCode>AYT</ns2:AirportCode>
+                                        <ns2:Date>2018-03-15Z</ns2:Date>
+                                        <ns2:Time>21:20</ns2:Time>
+                                        <ns2:ChangeOfDay>0</ns2:ChangeOfDay>
+                                    </ns2:Arrival>
+                                    <ns2:MarketingCarrier>
+                                        <ns2:AirlineID>XQ</ns2:AirlineID>
+                                        <ns2:FlightNumber>141</ns2:FlightNumber>
+                                    </ns2:MarketingCarrier>
+                                </ns2:SoldAirlineInfo>
+                            </ns2:CouponInfo>
+                        </ns2:TicketDocument>
+                        <ns2:PassengerReference>XQ_PAX_319784238</ns2:PassengerReference>
+                    </ns2:TicketDocInfo>
+                </ns2:TicketDocInfos>
+                <ns2:Metadata>
+                    <ns2:PassengerMetadata MetadataKey="XQ_MDK_1519310071318">
+                        <ns2:AugmentationPoint>
+                            <ns2:AugPoint Key="XQ_AUG_319784238">
+                                <ns3:TravellerAugPoint>
+                                    <PreferredLanguage>English</PreferredLanguage>
+                                    <PnrStatus>ACTIVE</PnrStatus>
+                                    <GuestAmountDetails>
+                                        <PriceAmount Code="EUR">116.99</PriceAmount>
+                                        <FeeAmount Code="EUR">0.0</FeeAmount>
+                                        <AmountToBePaid Code="EUR">0.0</AmountToBePaid>
+                                        <AmountPaid Code="EUR">116.99</AmountPaid>
+                                    </GuestAmountDetails>
+                                    <PaxType>ADULT</PaxType>
+                                </ns3:TravellerAugPoint>
+                            </ns2:AugPoint>
+                        </ns2:AugmentationPoint>
+                    </ns2:PassengerMetadata>
+                    <ns2:PassengerMetadata MetadataKey="XQ_MDK_1519310071520">
+                        <ns2:AugmentationPoint>
+                            <ns2:AugPoint Key="XQ_AUG_1519310071521">
+                                <ns3:ItineraryAmountDetailAugPoint>
+                                    <TotalPriceAmount Code="EUR">116.99</TotalPriceAmount>
+                                    <TotalFeeAmount Code="EUR">0.0</TotalFeeAmount>
+                                    <TotalAmount Code="EUR">116.99</TotalAmount>
+                                    <TotalAmountToBePaid Code="EUR">0.0</TotalAmountToBePaid>
+                                    <TotalAmountPaid Code="EUR">116.99</TotalAmountPaid>
+                                </ns3:ItineraryAmountDetailAugPoint>
+                            </ns2:AugPoint>
+                        </ns2:AugmentationPoint>
+                    </ns2:PassengerMetadata>
+                    <ns2:Other>
+                        <ns2:OtherMetadata>
+                            <ns2:CurrencyMetadatas>
+                                <ns2:CurrencyMetadata MetadataKey="EUR">
+                                    <ns2:Application>Display Currency</ns2:Application>
+                                    <ns2:Decimals>2</ns2:Decimals>
+                                    <ns2:Name>EURO</ns2:Name>
+                                </ns2:CurrencyMetadata>
+                            </ns2:CurrencyMetadatas>
+                        </ns2:OtherMetadata>
+                        <ns2:OtherMetadata>
+                            <ns2:ContactMetadatas>
+                                <ns2:ContactMetadata MetadataKey="XQ_MDK_1519310071529">
+                                    <ns2:AugmentationPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071316">
+                                            <ns3:ContactAugPoint>
+                                                <SendItineraryToEmailId>false</SendItineraryToEmailId>
+                                            </ns3:ContactAugPoint>
+                                        </ns2:AugPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071319">
+                                            <ns3:ContactAugPoint>
+                                                <SendItineraryToSMS>false</SendItineraryToSMS>
+                                            </ns3:ContactAugPoint>
+                                        </ns2:AugPoint>
+                                    </ns2:AugmentationPoint>
+                                </ns2:ContactMetadata>
+                            </ns2:ContactMetadatas>
+                        </ns2:OtherMetadata>
+                        <ns2:OtherMetadata>
+                            <ns2:PriceMetadatas>
+                                <ns2:PriceMetadata MetadataKey="XQ_MDK_1519310071534">
+                                    <ns2:AugmentationPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071531">
+                                            <ns3:FareComponentAugPoint>
+                                                <BaseFare Code="EUR">58.67</BaseFare>
+                                                <AppliedFare Code="EUR">58.67</AppliedFare>
+                                            </ns3:FareComponentAugPoint>
+                                        </ns2:AugPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071530">
+                                            <ns3:TaxDetailAugPoint>
+                                                <DisplayTaxCode>OY</DisplayTaxCode>
+                                            </ns3:TaxDetailAugPoint>
+                                        </ns2:AugPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071533">
+                                            <ns3:TaxDetailAugPoint>
+                                                <DisplayTaxCode>DE</DisplayTaxCode>
+                                            </ns3:TaxDetailAugPoint>
+                                        </ns2:AugPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071532">
+                                            <ns3:TaxDetailAugPoint>
+                                                <DisplayTaxCode>RA</DisplayTaxCode>
+                                            </ns3:TaxDetailAugPoint>
+                                        </ns2:AugPoint>
+                                        <ns2:AugPoint Key="XQ_AUG_1519310071535">
+                                            <ns3:FareDetailAugPoint>
+                                                <FareLevel>ST</FareLevel>
+                                            </ns3:FareDetailAugPoint>
+                                        </ns2:AugPoint>
+                                    </ns2:AugmentationPoint>
+                                </ns2:PriceMetadata>
+                            </ns2:PriceMetadatas>
+                        </ns2:OtherMetadata>
+                    </ns2:Other>
+                </ns2:Metadata>
+            </ns2:Response>
+        </ns2:OrderViewRS>
+    </soap:Body>
+</soap:Envelope>

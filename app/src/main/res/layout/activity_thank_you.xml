@@ -18,21 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#ffffff"
-        android:text="Your order has been placed successfully."
+        android:text="     Your order has been placed successfully."
         android:textColor="@android:color/background_dark"
         android:textSize="19sp"
         android:textStyle="bold" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#ffffff"
-        android:text="Pls. collect your ordered items at the desired time."
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        />
 
     <TextView
         android:id="@+id/pickItId"

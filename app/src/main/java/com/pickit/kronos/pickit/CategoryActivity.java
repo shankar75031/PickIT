@@ -17,6 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pickit.kronos.pickit.Adapters.ItemGridItemAdapter;
+import com.pickit.kronos.pickit.Data.Constants;
+import com.pickit.kronos.pickit.Objects.Item;
 
 import java.util.ArrayList;
 
@@ -72,6 +75,7 @@ public class CategoryActivity extends AppCompatActivity {
                         .putExtra("Price", itemList.get(i).getPrice())
                         .putExtra("Description", itemList.get(i).getDescription())
                         .putExtra("qty", 1)
+                        .putExtra("Image", itemList.get(i).getImage())
                 );
 
             }
@@ -95,7 +99,7 @@ public class CategoryActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_cart) {
 
-            // Do something
+            startActivity(new Intent(CategoryActivity.this, CartActivity.class));
             return true;
         }
 

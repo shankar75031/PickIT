@@ -19,7 +19,7 @@ public class ThankYouActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.thank_you);
+            setContentView(R.layout.activity_thank_you);
             Bundle extras = getIntent().getExtras();
             int pickedNumber = extras.getInt("pickITCode");
 

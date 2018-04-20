@@ -13,12 +13,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pickit.kronos.pickit.Data.Constants;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import java.io.InputStream;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     private EditText pnrTextView;
     private Button mStartButton;
     private String pnrNumber;
-
+    String tv="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,151 @@ public class SplashScreenActivity extends AppCompatActivity {
                     editor.putString("AirlineID", "XQ");
                     editor.putString("FlightNumber", "141");
                     editor.apply();
+
+
+                    try {
+                        SAXParserFactory factory = SAXParserFactory.newInstance();
+
+                        SAXParser saxParser = factory.newSAXParser();
+
+
+                        DefaultHandler handler = new DefaultHandler() {
+
+                            boolean surname = false;
+                            boolean given = false;
+                            boolean title = false;
+                            boolean arrival = false;
+                            boolean departure = false;
+                            boolean arrAirportCode = false;
+                            boolean arrDate = false;
+                            boolean arrTime = false;
+                            boolean deptAirportCode = false;
+                            boolean deptDate = false;
+                            boolean deptTime = false;
+                            boolean cinfo = false;
+
+
+                            public void startElement(String uri, String localName, String qName,
+                                                     Attributes attributes) throws SAXException {
+                                if (qName.equalsIgnoreCase("ns2:surname")) {
+                                    surname = true;
+                                }
+                                if (qName.equalsIgnoreCase("ns2:given")) {
+                                    given = true;
+                                }
+                                if (qName.equalsIgnoreCase("ns2:title")) {
+                                    title = true;
+                                }
+                                if (qName.equalsIgnoreCase("ns2:couponInfo")) {
+                                    cinfo = true;
+                                }
+                                if (!cinfo) {
+                                    if (qName.equalsIgnoreCase("ns2:Arrival")) {
+                                        arrival = true;
+                                        departure = false;
+                                    } else if (!departure && qName.equalsIgnoreCase("ns2:AirportCode")) {
+                                        arrAirportCode = true;
+                                    } else if (!departure && qName.equalsIgnoreCase("ns2:Date")) {
+                                        arrDate = true;
+
+                                    } else if (!departure && qName.equalsIgnoreCase("ns2:Time")) {
+                                        arrTime = true;
+
+                                    }
+
+                                    if (qName.equalsIgnoreCase("ns2:Departure")) {
+                                        arrival = false;
+                                        departure = true;
+
+                                    } else if (!arrival && qName.equalsIgnoreCase("ns2:AirportCode")) {
+                                        deptAirportCode = true;
+
+                                    } else if (!arrival && qName.equalsIgnoreCase("ns2:Date")) {
+                                        deptDate = true;
+
+                                    } else if (!arrival && qName.equalsIgnoreCase("ns2:Time")) {
+                                        deptTime = true;
+
+                                    }
+                                }
+
+                            }//end of startElement method
+
+                            public void endElement(String uri, String localName,
+                                                   String qName) throws SAXException {
+                                if (qName.equalsIgnoreCase("arrival")) {
+                                    tv=(tv + "\n Arrival EndElement: " + qName);
+                                }
+                            }
+
+                            public void characters(char ch[], int start, int length) throws SAXException {
+                                if (surname) {
+                                    String nameSurname = new String(ch, start, length);
+                                    tv=tv + "\n\n Surname : " + nameSurname;
+                                    surname = false;
+                                }
+                                if (given) {
+                                    String nameGiven = new String(ch, start, length);
+                                    tv=(tv + "\n Given : " + nameGiven);
+                                    given = false;
+                                }
+                                if (title) {
+                                    String nameTitle = new String(ch, start, length);
+                                    tv=(tv + "\n Title : " + nameTitle);
+                                    title = false;
+                                }
+
+
+                                if (arrAirportCode) {
+                                    String aAirCode = new String(ch, start, length);
+                                    tv=(tv + "\n Arrival Airport Code : " + aAirCode);
+                                    arrAirportCode = false;
+                                }
+                                if (arrDate) {
+                                    String aDate = new String(ch, start, length);
+                                    tv=(tv + "\n Arrival Date : " + aDate);
+                                    arrDate = false;
+                                }
+                                if (arrTime) {
+                                    String aTime = new String(ch, start, length);
+                                    tv=(tv + "\n Arrival Time: " + aTime);
+                                    arrTime = false;
+                                }
+                                if (deptAirportCode) {
+                                    String dAirCode = new String(ch, start, length);
+                                    tv=(tv + "\n Departure Airport Code : " + dAirCode);
+                                    deptAirportCode = false;
+                                }
+                                if (deptDate) {
+                                    String dDate = new String(ch, start, length);
+                                    tv=tv + "\n Departure Date: " + dDate;
+                                    deptDate = false;
+                                }
+                                if (deptTime) {
+                                    String dTime = new String(ch, start, length);
+                                    tv=(tv + "\n Departure Time: " + dTime);
+                                    deptTime = false;
+                                }
+// **/
+                            }//end of characters
+                            //method
+                        };//end of DefaultHandler object
+
+                        InputStream is = getAssets().open("OrderRetrieve.xml");
+                        saxParser.parse(is, handler);
+                        Toast.makeText(getApplicationContext(), tv, Toast.LENGTH_SHORT).show();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                    }
+
+                    String x =  "airportCode: FRA,\nairlineCode: XQ,\nflightNumber: 141,\ngate: 2";
+
+                    Toast.makeText(getApplicationContext(), x, Toast.LENGTH_SHORT).show();
+
+
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "Enter a valid PNR", Toast.LENGTH_SHORT).show();

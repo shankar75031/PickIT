@@ -5,50 +5,64 @@ package com.pickit.kronos.pickit.Objects;
 public class CartItem {
 
     //ATTRIBUTES
-    private String mItemName;
-    private String mItemPrice;
-    private String mQuantity;
-    private String mTotal;
+    private String itemName;
+    private String itemPrice;
+    private String qty;
+    private String total;
+    private String image;
 
     //CONSTRUCTOR
-    public CartItem(String itemName, String itemPrice, String qty) {
-        this.mItemName = itemName;
-        this.mItemPrice = itemPrice;
-        this.mQuantity = qty;
-        this.mTotal = String.valueOf(Integer.parseInt(mItemPrice) * Integer.parseInt(mQuantity));
+    public CartItem( String image, String itemName, String itemPrice, String qty) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.qty = qty;
+        this.total = String.valueOf(Integer.parseInt(itemPrice) * Integer.parseInt(qty));
+        this.image = image;
     }
 
     //GETTER METHODS
     public String getItemName() {
-        return mItemName;
+        return itemName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     //SETTER METHODS
     public void setItemName(String itemName) {
-        this.mItemName = itemName;
+        this.itemName = itemName;
     }
 
     public String getItemPrice() {
-        return mItemPrice;
+        return itemPrice;
     }
 
     public void setItemPrice(String itemPrice) {
-        this.mItemPrice = itemPrice;
+        this.itemPrice = itemPrice;
     }
 
     public String getQty() {
-        return mQuantity;
+        return qty;
     }
 
     public void setQty(String qty) {
-        this.mQuantity = qty;
+        this.qty = qty;
     }
 
     public String getTotal() {
-        return mTotal;
+        return total;
     }
 
     public void setTotal(String total) {
-        this.mTotal = String.valueOf(Integer.parseInt(mItemPrice) * Integer.parseInt(mQuantity));
+        this.total = total;
+    }
+
+    public CartItem() {
+
     }
 }
